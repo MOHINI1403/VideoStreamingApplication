@@ -1,5 +1,5 @@
 
-const asyncHandler=(fn)=>async(req,resp,next)=>{
+export const asyncHandler=(fn)=>async(req,resp,next)=>{
     try{
         await fn(req,resp,next)
     }
@@ -10,7 +10,7 @@ const asyncHandler=(fn)=>async(req,resp,next)=>{
         })
     }
 }
-export {asyncHandler}
+
 
 /*
 const asyncHandler=(requestHandler)=>{

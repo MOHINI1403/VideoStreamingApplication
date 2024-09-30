@@ -31,10 +31,11 @@ const registerUser = asyncHandler(async (req, resp) => {
   }
   // The Images uploaded by Multer in Req is fetched from the request body.
   console.log(req.files);
-  const avatarLocalPath = req.files?.avatar[0]?.path;
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
-  console.log(avatarLocalPath);
-  console.log(coverImageLocalPath);
+  //const avatarLocalPath = req.files?.avatar[0]?.path;
+  //const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  //console.log("Printing the image paths");
+  //console.log(avatarLocalPath);
+  //console.log(coverImageLocalPath);
   resp.status(200).json({message:"The code run succesfully"});
   /*
   if (!avatarLocalPath) {

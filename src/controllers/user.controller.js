@@ -33,7 +33,10 @@ const registerUser = asyncHandler(async (req, resp) => {
   // The Images uploaded by Multer in Req is fetched from the request body.
   console.log(req.files);
   const avatarLocalPath = req.files?.avatar[0]?.path;
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  let coverImageLocalPath;
+  if(req.files && Array.isArray(req.files.coverImage)&& req.files.coverImage.length>0){
+    coverImageLocalPath=req.files.coverImage[0].path;
+  }
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar File is Required !");
   }
@@ -43,7 +46,6 @@ const registerUser = asyncHandler(async (req, resp) => {
   if (!avatar) {
     throw new ApiError(400, "Avatar File is Required !");
   }
-  console.log('Avatar Created');
   // Create a Object and Enter the Details in Database :
   const user = await User.create({
     fullName,
@@ -53,7 +55,6 @@ const registerUser = asyncHandler(async (req, resp) => {
     password,
     userName: userName.toLowerCase(),
   });
-  console.log('User Created');
   // check for user creation : Also removing certain columns from the response
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"

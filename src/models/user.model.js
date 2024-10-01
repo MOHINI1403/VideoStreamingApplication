@@ -29,7 +29,6 @@ const userSchema=new Schema({
     },
     coverImage:{
         type:String, // cloudinary URL
-        required:[true,'CoverImage is required']
         
     },
     watchHistory:[
@@ -49,12 +48,17 @@ const userSchema=new Schema({
 },{timestamps:true});
 
 // We want the code to run only when the change in password field is made not everytime 
-userSchema.pre("save",async function (err,req,resp,next) {
+userSchema.pre("save",async function (next) {
     if(!this.isModified("password")){
         return next();
     }
-    this.password=await bcrypt.hash(this.password,10);
-    next();
+    try {
+        // Hash the password before saving
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (err) {
+        next(err); 
+    }
 })
 // This portion checks the password 
 userSchema.methods.isPasswordCorrect=async function(password){

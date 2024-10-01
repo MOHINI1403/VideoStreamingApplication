@@ -6,11 +6,13 @@ import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 const registerUser = asyncHandler(async (req, resp) => {
   const { fullName, email, userName, password } = req.body;
-  console.log(req.body);
-  console.log(email);
   // Check for the Validations :
-  if ([fullName, email, userName, password].some(field => field == null || field.trim() === "")) {
-     throw new ApiError(400, "All fields are compulsory or required!!");
+  if (
+    [fullName, email, userName, password].some(
+      (field) => field == null || field.trim() === ""
+    )
+  ) {
+    throw new ApiError(400, "All fields are compulsory or required!!");
   }
   /*if (!emailRegex.test(email)) {
     throw new ApiError(
@@ -18,7 +20,6 @@ const registerUser = asyncHandler(async (req, resp) => {
       "The Email Formatting is not Correct Please enter the Correct Email format !!"
     );
   }*/
-  console.log(req.body);
   // Check weather the User Already Exists or not :
   const existedUser = await User.findOne({
     $or: [{ userName }, { email }],
@@ -31,18 +32,10 @@ const registerUser = asyncHandler(async (req, resp) => {
   }
   // The Images uploaded by Multer in Req is fetched from the request body.
   console.log(req.files);
-  //const avatarLocalPath = req.files?.avatar[0]?.path;
-  //const coverImageLocalPath = req.files?.coverImage[0]?.path;
-  //console.log("Printing the image paths");
-  //console.log(avatarLocalPath);
-  //console.log(coverImageLocalPath);
-  resp.status(200).json({message:"The code run succesfully"});
-  /*
+  const avatarLocalPath = req.files?.avatar[0]?.path;
+  const coverImageLocalPath = req.files?.coverImage[0]?.path;
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar File is Required !");
-  }
-  if(!coverImageLocalPath){
-    throw new ApiError(400,"Cover Image is not there");
   }
   // Upload Them to Cloudinary.
   const avatar = await uploadOnCloudinary(avatarLocalPath);
@@ -50,6 +43,7 @@ const registerUser = asyncHandler(async (req, resp) => {
   if (!avatar) {
     throw new ApiError(400, "Avatar File is Required !");
   }
+  console.log('Avatar Created');
   // Create a Object and Enter the Details in Database :
   const user = await User.create({
     fullName,
@@ -59,6 +53,7 @@ const registerUser = asyncHandler(async (req, resp) => {
     password,
     userName: userName.toLowerCase(),
   });
+  console.log('User Created');
   // check for user creation : Also removing certain columns from the response
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
@@ -73,8 +68,5 @@ const registerUser = asyncHandler(async (req, resp) => {
   return resp
     .status(201)
     .json(new ApiResponse(200, createdUser, "User Registered Succesfully !"));
-
-  */
-  
 });
 export { registerUser };

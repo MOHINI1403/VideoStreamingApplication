@@ -10,6 +10,7 @@ const asyncHandler=(fn)=>async(req,resp,next)=>{
         })
     }
 }
+
 export {asyncHandler};
 
 /*

@@ -199,7 +199,63 @@ const refreshAccessToken = asyncHandler(async (req, resp) => {
         )
       );
   } catch (error) {
-    throw new ApiError(500,error?.message || "Invalid Refresh Token !");
+    throw new ApiError(500, error?.message || "Invalid Refresh Token !");
   }
 });
-export { registerUser, loginUser, logOutUser, refreshAccessToken };
+
+const changeCurrentPassword = asyncHandler(async (req, resp) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user?._id;
+  const user = await User.findById(userId);
+  const isPasswordCorrect = user.isPasswordCorrect(oldPassword);
+  if (!isPasswordCorrect) {
+    throw new ApiError(400, "Invalid Passowrd !");
+  }
+  user.password = newPassword;
+  await user.save({ validateBeforeSave: false });
+
+  return resp
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password Changed Successfully !"));
+});
+
+const getCurrentUser=asyncHandler(async(req,resp)=>{
+  return resp.status(200).json(200,req.user,"Current User Fetched Successfully !");
+});
+const updateAccountDetails=asyncHandler(async(req,resp)=>{
+  const {fullName,email}=req.body;
+  if(!(fullName || email)){
+    throw new ApiError(400, "All fields are required !");
+  }
+  const userId=req.user?._id;
+  const user=await User.findByIdAndUpdate(
+    userId,
+    {
+      $set:{
+        fullName:fullName,
+        email:email
+      }
+    },
+    {new:true}
+  ).select("-password");
+  return resp.status(200).json(new ApiResponse(200,user,"Account Details Updated Successfully !"));
+
+});
+// use two middlewares : first multer and then auth 
+const updateAvatarImage=asyncHandler(async(req,resp)=>{
+  const userId=req.user?._id;
+  const avatarLocalPath = req.file?.path;
+  if(!avatarLocalPath){
+    throw new ApiError(400,"The Avatar Image is Not Uploaded !");
+  };
+  const avatar = await uploadOnCloudinary(avatarLocalPath);
+  const user=User.findById(userId);
+  user.avatar=avatar.url;
+  const createdUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+  return resp
+    .status(201)
+    .json(new ApiResponse(200, createdUser, "Avatar Image Changed Succesfully !"));
+});
+export { registerUser, loginUser, logOutUser, refreshAccessToken , changeCurrentPassword , getCurrentUser,updateAvatarImage,updateAccountDetails};

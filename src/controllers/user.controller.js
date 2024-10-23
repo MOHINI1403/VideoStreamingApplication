@@ -5,6 +5,7 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -361,6 +362,59 @@ const getUserChannelProfile = asyncHandler(async (req, resp) => {
       new ApiResponse(200, channel[0], "User channel fetched successfully !")
     );
 });
+const getUsersWatchHistory = asyncHandler(async (req, resp) => {
+  // aggregation pipelines ka code direct jaata hai
+  const user = await User.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(req.user._id),
+      },
+    },
+    {
+      $lookup: {
+        from: "videos",
+        localField: "watchHistory",
+        foreignField: "_id",
+        as: "watchHistory",
+        pipeline: [
+          {
+            $lookup: {
+              from: "users",
+              localField: "owner",
+              foreignField: "_id",
+              as: "owner",
+              pipeline: [
+                {
+                  $project: {
+                    username: 1,
+                    fullName: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $addFields: {
+              owner: {
+                $first: "$owner",
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+  return resp
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        user[0].watchHistory,
+        "Information regardign the watchInformation of the user is sent "
+      )
+    );
+});
 export {
   registerUser,
   loginUser,
@@ -372,4 +426,5 @@ export {
   updateAccountDetails,
   updateCoverImage,
   getUserChannelProfile,
+  getUsersWatchHistory,
 };

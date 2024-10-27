@@ -8,4 +8,4 @@ const tweetsSchema=new Schema({
         type:String
     }
 },{timestamps:true});
-export const Tweet=mongoose.model("Tweet",tweetsSchema);
+export const Tweet=mongoose.model("Tweet",tweetsSchema);    

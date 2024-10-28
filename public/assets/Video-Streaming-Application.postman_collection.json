@@ -1,0 +1,756 @@
+{
+	"info": {
+		"_postman_id": "902a029b-fab3-49a4-8983-51ab5b1b55d7",
+		"name": "Video-Streaming-Application",
+		"description": "This API serves as the backend for a full-featured video streaming application, built with **Node**.js, **Express**.js, **MongoDB**, and enhanced with aggregation pipelines and comprehensive API testing tools. The endpoints are systematically organized across folders, each addressing core functionalities such as user management, video handling, comments, playlists, and more.\n\nThe **model** we are looking to design :\n\n[https://app.eraser.io/workspace/JQqytUDovWBRYG6KMPSV?origin=share](https://app.eraser.io/workspace/JQqytUDovWBRYG6KMPSV?origin=share)\n\nPlease refer to the structured sections below for endpoint details and testing guidelines.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27647667"
+	},
+	"item": [
+		{
+			"name": "Users Folder",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userName",
+									"value": "mohini_chauhan_2003",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "Mohini Chauhan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mohinichauhan9998@outlook.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Chauhan@1403",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/mohinichauhan/Downloads/HindiText.jpeg"
+								},
+								{
+									"key": "coverImage",
+									"type": "file",
+									"src": "/Users/mohinichauhan/Downloads/Hindi-Text-1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"mohinichauhan2003@gmail.com\",\n    \"userName\": \"mohini_chauhan_1403\",\n    \"password\":\"Chauhan@1403\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/logout",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "watchHistory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/watchHistory",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"watchHistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "current-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/current-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This folder consists of all the API's which are associated with the user."
+		},
+		{
+			"name": "Video Folder",
+			"item": [
+				{
+					"name": "publishVideo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "VideoStreamingApplication",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is the application which is like U Tube and works into the similar way like that",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/Users/mohinichauhan/Desktop/Screen Recording 2024-10-22 at 12.59.38 AM.mov"
+								},
+								{
+									"key": "videoFile",
+									"type": "file",
+									"src": "/Users/mohinichauhan/Desktop/Screen Recording 2024-10-22 at 12.59.38 AM.mov"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/videos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVideoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/videos/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllVideos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "updateVideo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "YouTubeClone",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This videoStreamingApplication is the clone of YouTube",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/Users/mohinichauhan/Desktop/Screen Recording 2024-10-22 at 12.59.38 AM.mov"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/videos/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVideo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/videos/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "togglePublishStatus",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/videos/toggle/publish/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"toggle",
+								"publish",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments Folder",
+			"item": [
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"This is the comment section contnet which i am putting !!!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllComments",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "updateComment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"There is the new content of the desired comment !\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/c/671dc6639246965901f76da0",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"c",
+								"671dc6639246965901f76da0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteComment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comments/c/671dc6639246965901f76da0",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"c",
+								"671dc6639246965901f76da0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist Folder",
+			"item": [
+				{
+					"name": "createPlaylist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"YouTube Clone Playlist\",\n    \"description\":\"This is the playlist which is createe and covering the content of creating the youtube clone using Node.Js,Express.Js,MongoDB\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPlaylistsForUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/playlist/user/6714a0e2316595330795f55e",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"user",
+								"6714a0e2316595330795f55e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPlaylistById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addVideoToPlaylist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/playlist/add/671db89ed7b1a4575dd9cc5c/671e50dc6feafe75915b6eab",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"add",
+								"671db89ed7b1a4575dd9cc5c",
+								"671e50dc6feafe75915b6eab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeVideoFromPlaylist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/playlist/remove/671db89ed7b1a4575dd9cc5c/671e50dc6feafe75915b6eab",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"remove",
+								"671db89ed7b1a4575dd9cc5c",
+								"671e50dc6feafe75915b6eab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePlaylist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/playlist/671e50dc6feafe75915b6eab",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"671e50dc6feafe75915b6eab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePlaylist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Video Streaming Application Playlist\",\n    \"description\":\"This is the playlist consisting the entire backend code for creating the video streaming Application just like youTube\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/671e50dc6feafe75915b6eab",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"671e50dc6feafe75915b6eab"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tweet Folder",
+			"item": []
+		},
+		{
+			"name": "Subscription Folder",
+			"item": [
+				{
+					"name": "toggleSubscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscriptions/c/6719cd6d4b64e3728f166480",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"c",
+								"6719cd6d4b64e3728f166480"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserChannelSusbcribers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscriptions/c/6719cd6d4b64e3728f166480",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"c",
+								"6719cd6d4b64e3728f166480"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubscribedChannels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscriptions/u/6714a0e2316595330795f55e",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"u",
+								"6714a0e2316595330795f55e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Like Folder",
+			"item": [
+				{
+					"name": "toggleVideoLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/likes/toggle/v/671db89ed7b1a4575dd9cc5c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"likes",
+								"toggle",
+								"v",
+								"671db89ed7b1a4575dd9cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleCommentlLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/likes/toggle/c/671dc6639246965901f76da0",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"likes",
+								"toggle",
+								"c",
+								"671dc6639246965901f76da0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleTweetLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/likes/toggle/t/:tweetId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"likes",
+								"toggle",
+								"t",
+								":tweetId"
+							],
+							"variable": [
+								{
+									"key": "tweetId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLikedVideos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/likes/videos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"likes",
+								"videos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard Folder",
+			"item": [
+				{
+					"name": "getChannelStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/dashboard/stats",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"dashboard",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getChannelVideos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/dashboard/videos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"dashboard",
+								"videos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Requests Included :**\n\n1. **getChannelStats**:\n    \n    1. This requests\n        \n2. getChannelVideos:"
+		},
+		{
+			"name": "HealthCheck Folder",
+			"item": [
+				{
+					"name": "healthCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/healthcheck",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

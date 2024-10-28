@@ -1,10 +1,15 @@
-Here's a refined README for your video streaming application:
-
----
 
 # Video Streaming Application
 
 A full-featured video streaming platform built on Node.js and Express.js, offering an interactive, personalized user experience with real-time analytics, secure user management, and dynamic media content handling. Deployed on Azure App Services, this application employs a CI/CD pipeline via GitHub Actions for smooth, scalable deployment.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Azure App Services](https://img.shields.io/badge/Azure_App_Services-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+
+---
 
 ## Key Features
 

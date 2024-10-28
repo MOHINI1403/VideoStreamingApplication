@@ -26,12 +26,11 @@ const getChannelVideos = asyncHandler(async (req, res) => {
     // TODO: Get all the videos uploaded by the channel
     const channelId=req.user._id;
     const {page=1,limit=10}=req.query;
-    const videos=await Video.find({owner:req.user})
+    const videos=await Video.find({owner:new mongoose.Types.ObjectId(channelId)})
         .sort({createdAt:-1})
-        .skip((page=1)*limit)
+        .skip((page-1)*limit)
         .limit(parseInt(limit))
         .select("title description videoFile thumbnail views createdAt");
-
     if(!videos.length){
         throw new ApiError(400,"No videos found for this channel")
     }

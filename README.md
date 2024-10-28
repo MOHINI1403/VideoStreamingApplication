@@ -23,6 +23,8 @@ A full-featured video streaming platform built on Node.js and Express.js, offeri
 - **CI/CD Pipeline for Scalable Deployment**: GitHub Actions streamline the CI/CD pipeline, enhancing deployment efficiency and scalability.
 - **Real-Time Analytics and Health Monitoring**: Real-time analytics and a health-check API maintain platform stability and responsiveness.
 
+---
+
 ## Technology Stack
 
 - **Backend**: Node.js, Express.js
@@ -30,6 +32,12 @@ A full-featured video streaming platform built on Node.js and Express.js, offeri
 - **Authentication**: JWT for access and refresh tokens, bcrypt for secure password hashing
 - **Media Management**: Cloudinary for avatar and cover image storage
 - **CI/CD and Deployment**: GitHub Actions, Azure App Services
+
+---
+## Model Structure:
+![Model Image](https://github.com/MOHINI1403/VideoStreamingApplication/blob/main/public/assets/models.png?raw=true)
+
+---
 
 ## API Endpoints
 

@@ -40,6 +40,9 @@ A full-featured video streaming platform built on Node.js and Express.js, offeri
 ---
 
 ## API Endpoints
+![API Endpoints](https://github.com/MOHINI1403/VideoStreamingApplication/blob/main/public/assets/api-endpoints.png?raw=true)
+
+---
 
 ## Setup and Installation
 
@@ -79,9 +82,13 @@ A full-featured video streaming platform built on Node.js and Express.js, offeri
 1. Configure Azure App Services settings.
 2. Deploy using GitHub Actions for automatic deployment on each commit to the main branch.
 
+---
+
 ## Contributing
 
 Contributions are welcome! Please fork this repository, create a new branch, and submit a pull request with your changes.
+
+---
 
 ## License
 
